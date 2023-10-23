@@ -1,7 +1,7 @@
 "use client";
 
-import { useDispatch } from "@/app/lib/redux";
-import { fetchGameStateAsync } from "@/app/lib/redux";
+import { useDispatch } from "@/lib/redux";
+import { fetchGameStateAsync } from "@/lib/redux";
 
 function NewGame() {
   const dispatch = useDispatch();

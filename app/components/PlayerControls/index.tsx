@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchGameStateAsync, useDispatch } from "@/app/lib/redux";
+import { fetchGameStateAsync, useDispatch } from "@/lib/redux";
 
 function PlayerControls() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 "use client";
 
-import { selectGameState, useSelector } from "@/app/lib/redux";
+import { selectGameState, useSelector } from "@/lib/redux";
 
 function EndGameScreen() {
   const gameState = useSelector(selectGameState);

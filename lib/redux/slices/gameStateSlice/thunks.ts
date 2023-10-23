@@ -1,4 +1,4 @@
-import { createAppAsyncThunk } from "@/app/lib/redux/createAppAsyncThunk";
+import { createAppAsyncThunk } from "@/lib/redux/createAppAsyncThunk";
 import { fetchGameState } from "./fetchGameState";
 
 export const fetchGameStateAsync = createAppAsyncThunk(
