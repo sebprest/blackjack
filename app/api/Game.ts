@@ -3,7 +3,7 @@ import {
   DEFAULT_GAME_STATE,
   GAME_STATUS,
   PLAYER_TYPES,
-} from "./consts";
+} from "../../lib/consts";
 import { GameNotInProgressError } from "./errors";
 import { GameState, Card } from "./types";
 

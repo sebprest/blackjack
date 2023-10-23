@@ -1,4 +1,4 @@
-import { GameState } from "./types";
+import { GameState } from "../app/api/types";
 
 export const CARD_TYPES = [
   "2",

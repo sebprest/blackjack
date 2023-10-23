@@ -1,5 +1,5 @@
 "use client";
-import { PLAYER_TYPES } from "./api/consts";
+import { PLAYER_TYPES } from "../lib/consts";
 import EndGameScreen from "./components/EndGameScreen";
 import Hand from "./components/Hand";
 import NewGame from "./components/NewGame";

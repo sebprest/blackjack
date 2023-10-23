@@ -2,7 +2,7 @@
 
 import { PlayerType } from "@/app/api/types";
 import PlayingCard from "../PlayingCard";
-import { PLAYER_TYPES } from "@/app/api/consts";
+import { PLAYER_TYPES } from "@/lib/consts";
 import PlayerControls from "../PlayerControls";
 import { useSelector, selectGameState } from "@/lib/redux";
 

@@ -1,4 +1,4 @@
-import { CARD_TYPES, GAME_STATUS, PLAYER_TYPES } from "./consts";
+import { CARD_TYPES, GAME_STATUS, PLAYER_TYPES } from "../../lib/consts";
 
 export type Card = (typeof CARD_TYPES)[number];
 export interface Hand {

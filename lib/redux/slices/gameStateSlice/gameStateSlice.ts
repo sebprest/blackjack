@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { GameState } from "@/app/api/types";
-import { DEFAULT_GAME_STATE } from "@/app/api/consts";
+import { DEFAULT_GAME_STATE } from "@/lib/consts";
 import { fetchGameStateAsync } from "./thunks";
 
 const initialState: GameStateSliceState = {
