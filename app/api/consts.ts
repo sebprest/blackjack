@@ -25,8 +25,8 @@ export const GAME_STATUS = {
   ended: "ended",
 } as const;
 export const DEFAULT_GAME_STATE: GameState = {
-  playerHand: [],
-  dealerHand: [],
+  playerHand: { cards: [], score: 0 },
+  dealerHand: { cards: [], score: 0 },
   winner: null,
   gameStatus: GAME_STATUS.notStarted,
 };

@@ -5,66 +5,75 @@ import {
   PLAYER_TYPES,
 } from "./consts";
 import { GameNotInProgressError } from "./errors";
-import { GameState, Hand } from "./types";
+import { GameState, Card } from "./types";
 
 class Game {
   gameState: GameState;
 
   constructor() {
-    this.gameState = DEFAULT_GAME_STATE;
+    this.gameState = { ...DEFAULT_GAME_STATE };
   }
 
   startNewGame() {
-    let { playerHand, dealerHand, gameStatus } = this.gameState;
-
-    playerHand = [drawCard(), drawCard()];
-    dealerHand = [drawCard(), drawCard()];
-    gameStatus = GAME_STATUS.inProgress;
+    this.gameState = { ...DEFAULT_GAME_STATE };
+    const playerHand = [drawCard(), drawCard()];
+    const dealerHand = [drawCard(), drawCard()];
+    this.gameState.playerHand = {
+      cards: playerHand,
+      score: this.calculateScore(playerHand),
+    };
+    this.gameState.dealerHand = {
+      cards: dealerHand,
+      score: this.calculateScore(playerHand),
+    };
+    this.gameState.gameStatus = GAME_STATUS.inProgress;
   }
 
   playerHit() {
-    let { playerHand, gameStatus, winner } = this.gameState;
-
-    if (gameStatus !== GAME_STATUS.inProgress) {
+    if (this.gameState.gameStatus !== GAME_STATUS.inProgress) {
       throw new GameNotInProgressError();
     }
 
-    playerHand.push(drawCard());
+    this.gameState.playerHand.cards.push(drawCard());
+    this.gameState.playerHand.score = this.calculateScore(
+      this.gameState.playerHand.cards,
+    );
 
-    const playerScore = this.calculateScore(playerHand);
-
-    if (playerScore > 21) {
-      winner = PLAYER_TYPES.dealer;
-      gameStatus = GAME_STATUS.ended;
+    if (this.gameState.playerHand.score > 21) {
+      this.gameState.winner = PLAYER_TYPES.dealer;
+      this.gameState.gameStatus = GAME_STATUS.ended;
     }
   }
 
   playerStand() {
-    let { playerHand, dealerHand, gameStatus, winner } = this.gameState;
-
-    if (gameStatus !== GAME_STATUS.inProgress) {
+    if (this.gameState.gameStatus !== GAME_STATUS.inProgress) {
       throw new GameNotInProgressError();
     }
 
-    while (this.calculateScore(dealerHand) < 17) {
-      dealerHand.push(drawCard());
+    while (this.gameState.dealerHand.score < 17) {
+      this.gameState.dealerHand.cards.push(drawCard());
+      this.gameState.dealerHand.score = this.calculateScore(
+        this.gameState.dealerHand.cards,
+      );
     }
 
-    const playerScore = this.calculateScore(playerHand);
-    const dealerScore = this.calculateScore(dealerHand);
-
-    if (dealerScore > 21 || playerScore > dealerScore) {
-      winner = "player";
-    } else if (playerScore === dealerScore) {
-      winner = "draw";
+    if (
+      this.gameState.dealerHand.score > 21 ||
+      this.gameState.playerHand.score > this.gameState.dealerHand.score
+    ) {
+      this.gameState.winner = "player";
+    } else if (
+      this.gameState.playerHand.score === this.gameState.dealerHand.score
+    ) {
+      this.gameState.winner = "draw";
     } else {
-      winner = "dealer";
+      this.gameState.winner = "dealer";
     }
 
-    gameStatus = GAME_STATUS.ended;
+    this.gameState.gameStatus = GAME_STATUS.ended;
   }
 
-  calculateScore(hand: Hand) {
+  calculateScore(hand: Card[]) {
     let score = 0;
     let numAces = 0;
 
