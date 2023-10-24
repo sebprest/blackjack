@@ -16,6 +16,8 @@ function Hand({ player }: HandProps) {
   if (!gameState) return null;
 
   const hand = gameState[`${player}Hand`];
+  const shouldShowPlayerScoreAndControls =
+    player === PLAYER_TYPES.player && gameState.gameStatus === "inProgress";
 
   return (
     <div className="flex flex-wrap justify-between flex-col border border-white border-solid rounded-lg p-4">
@@ -33,10 +35,11 @@ function Hand({ player }: HandProps) {
           />
         ))}
       </div>
-      {(player === PLAYER_TYPES.player || gameState.gameStatus === "ended") && (
+      {(shouldShowPlayerScoreAndControls ||
+        gameState.gameStatus === "ended") && (
         <p className="text-center">{hand.score}</p>
       )}
-      {player === PLAYER_TYPES.player && <PlayerControls />}
+      {shouldShowPlayerScoreAndControls && <PlayerControls />}
     </div>
   );
 }
