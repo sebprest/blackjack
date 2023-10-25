@@ -13,7 +13,7 @@ interface HandProps {
 function Hand({ player }: HandProps) {
   const gameState = useSelector(selectGameState);
 
-  if (!gameState) return null;
+  if (!gameState || gameState.gameStatus === "notStarted") return null;
 
   const hand = gameState[`${player}Hand`];
   const shouldShowPlayerScoreAndControls =
