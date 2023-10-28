@@ -46,7 +46,11 @@ describe("Hand", () => {
 
   describe("when game is ended", () => {
     it("should render the hand and player score for the player hand", () => {
-      useSelector.mockImplementation(() => ({ ...gameState, gameStatus: "ended", winner: "player" }))
+      useSelector.mockImplementation(() => ({
+        ...gameState,
+        gameStatus: "ended",
+        winner: "player",
+      }));
       const { getByText, getAllByText } = render(<Hand player="player" />);
       expect(getByText("player")).toBeInTheDocument();
       expect(getByText("6")).toBeInTheDocument();
@@ -56,7 +60,11 @@ describe("Hand", () => {
     });
 
     it("should render the hand and dealer score for the dealer hand", () => {
-      useSelector.mockImplementation(() => ({ ...gameState, gameStatus: "ended", winner: "dealer" }))
+      useSelector.mockImplementation(() => ({
+        ...gameState,
+        gameStatus: "ended",
+        winner: "dealer",
+      }));
       const { getByText, getAllByText } = render(<Hand player="dealer" />);
       expect(getByText("dealer")).toBeInTheDocument();
       expect(getByText("15")).toBeInTheDocument();
