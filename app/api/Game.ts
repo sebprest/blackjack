@@ -24,7 +24,7 @@ class Game {
     };
     this.gameState.dealerHand = {
       cards: dealerHand,
-      score: this.calculateScore(playerHand),
+      score: this.calculateScore(dealerHand),
     };
     this.gameState.gameStatus = GAME_STATUS.inProgress;
   }
